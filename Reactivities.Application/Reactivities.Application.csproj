@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Reactivities.Domain\Reactivities.Domain.csproj" />
+    <ProjectReference Include="..\Reactivities.Persistence\Reactivities.Persistence.csproj" />
+  </ItemGroup>
+
+</Project>
