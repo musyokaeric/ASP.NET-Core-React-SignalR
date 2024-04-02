@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reactivities.Application", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reactivities.Persistence", "Reactivities.Persistence\Reactivities.Persistence.csproj", "{6CA0B838-0487-47F1-83F6-422E6FAE50BB}"
 EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "client-app", "client-app\client-app.esproj", "{2767F163-8C75-491F-963E-2B5153D21DB4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,12 @@ Global
 		{6CA0B838-0487-47F1-83F6-422E6FAE50BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6CA0B838-0487-47F1-83F6-422E6FAE50BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6CA0B838-0487-47F1-83F6-422E6FAE50BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2767F163-8C75-491F-963E-2B5153D21DB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2767F163-8C75-491F-963E-2B5153D21DB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2767F163-8C75-491F-963E-2B5153D21DB4}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{2767F163-8C75-491F-963E-2B5153D21DB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2767F163-8C75-491F-963E-2B5153D21DB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2767F163-8C75-491F-963E-2B5153D21DB4}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
