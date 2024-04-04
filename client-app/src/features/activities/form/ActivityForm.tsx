@@ -5,9 +5,10 @@ import { ChangeEvent, FormEvent, useState } from "react";
 interface Props {
     activity: Activity | undefined;
     closeForm: () => void;
+    createOrEdit: (activity: Activity) => void;
 }
 
-export default function ActivityForm({ activity: selectedActivity, closeForm }: Props) {
+export default function ActivityForm({ activity: selectedActivity, closeForm, createOrEdit }: Props) {
 
     const initialState = selectedActivity ?? {
         id: '',
@@ -24,6 +25,7 @@ export default function ActivityForm({ activity: selectedActivity, closeForm }: 
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
         console.log(activity);
+        createOrEdit(activity);
     }
 
     function inputChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
