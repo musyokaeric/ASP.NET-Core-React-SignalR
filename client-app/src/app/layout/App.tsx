@@ -40,10 +40,14 @@ function App() {
     function handeleCreateOrEditActivity(activity: Activity) {
         activity.id
             ? setActivities([...activities.filter(x => x.id !== activity.id), activity]) // removes or filters out the original activity, then adds the edited activity
-            : setActivities([...activities, {...activity, id: uuid()}]); // add the new activity
+            : setActivities([...activities, { ...activity, id: uuid() }]); // add the new activity
 
         setEditMode(false);
         setSelectedActivity(activity);
+    }
+
+    function handleDeleteActivity(id: string) {
+        setActivities([...activities.filter(x => x.id !== id)])
     }
 
     return (
@@ -59,7 +63,8 @@ function App() {
                     editMode={editMode}
                     openForm={handleFormOpen}
                     closeForm={handleFormClose}
-                    createOrEdit={handeleCreateOrEditActivity} />
+                    createOrEdit={handeleCreateOrEditActivity}
+                    deleteActivity={handleDeleteActivity} />
             </Container>
         </>
     )
