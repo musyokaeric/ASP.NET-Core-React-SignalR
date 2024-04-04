@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Reactivities.Application.Activities;
+using Reactivities.API.Extensions;
 using Reactivities.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,23 +12,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
-// Database Context
-builder.Services.AddDbContext<DataContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-// MediatR Service
-builder.Services.AddMediatR(config => config.RegisterServicesFromAssembly(typeof(List.Handler).Assembly));
-// registers all services in the same assembly as List.Hander = Reactivities.Application.Activities namespace
-
-
-// Client: CORS policy
-builder.Services.AddCors(options =>
-{
-    string clientUrl = "http://localhost:3000";
-    options.AddPolicy("CorsPolicy", policy =>
-    {
-        policy.AllowAnyHeader().AllowAnyMethod().WithOrigins(clientUrl);
-    });
-});
+// Application Service Extension
+builder.Services.AddApplicationServices(builder.Configuration);
 
 
 var app = builder.Build();
