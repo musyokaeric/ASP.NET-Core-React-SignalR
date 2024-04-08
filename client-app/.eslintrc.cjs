@@ -11,7 +11,7 @@ module.exports = {
     plugins: ['react-refresh'],
     rules: {
         'react-refresh/only-export-components': [
-            'warn',
+            'off', // disables fast refresh warning on es-lint. this warning comes up when a component updates forces react to reload and not refresh. in this instance, working with MobX class components do not support fast refresh (hmr updates)
             { allowConstantExport: true },
         ],
     },
