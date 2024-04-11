@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FluentValidation;
+using FluentValidation.AspNetCore;
+using Microsoft.EntityFrameworkCore;
 using Reactivities.Application.Activities;
 using Reactivities.Persistence;
 
@@ -15,6 +17,9 @@ namespace Reactivities.API.Extensions
             services.AddMediatR(config => config.RegisterServicesFromAssembly(typeof(List.Handler).Assembly));
             // registers all services in the same assembly as List.Hander = Reactivities.Application.Activities namespace
 
+            // Fluent Validation
+            services.AddFluentValidationAutoValidation();
+            services.AddValidatorsFromAssemblyContaining<Create>();
 
             // Client: CORS policy
             services.AddCors(options =>
