@@ -23,12 +23,14 @@
     "react-toastify": "^10.0.5",
     "semantic-ui-css": "^2.5.0",
     "semantic-ui-react": "^3.0.0-beta.2",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@types/uuid": "^9.0.8",
+    "@types/yup": "^0.32.0",
     "@typescript-eslint/eslint-plugin": "^7.2.0",
     "@typescript-eslint/parser": "^7.2.0",
     "@vitejs/plugin-react": "^4.2.1",
