@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34616.47
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reactivities.API", "Reactivities.API\Reactivities.API.csproj", "{064C2D3D-F86F-462B-9955-D34AAE47962D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reactivities.API", "Reactivities.API\Reactivities.API.csproj", "{064C2D3D-F86F-462B-9955-D34AAE47962D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reactivities.Domain", "Reactivities.Domain\Reactivities.Domain.csproj", "{3375C1AE-57BF-4D71-93E0-97E92FC8F8ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reactivities.Domain", "Reactivities.Domain\Reactivities.Domain.csproj", "{3375C1AE-57BF-4D71-93E0-97E92FC8F8ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reactivities.Application", "Reactivities.Application\Reactivities.Application.csproj", "{B430404F-EF2E-4BC3-B6B5-8D381C6E50F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reactivities.Application", "Reactivities.Application\Reactivities.Application.csproj", "{B430404F-EF2E-4BC3-B6B5-8D381C6E50F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reactivities.Persistence", "Reactivities.Persistence\Reactivities.Persistence.csproj", "{6CA0B838-0487-47F1-83F6-422E6FAE50BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reactivities.Persistence", "Reactivities.Persistence\Reactivities.Persistence.csproj", "{6CA0B838-0487-47F1-83F6-422E6FAE50BB}"
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "client-app", "client-app\client-app.esproj", "{2767F163-8C75-491F-963E-2B5153D21DB4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reactivities.Infrasctructure", "Reactivities.Infrasctructure\Reactivities.Infrasctructure.csproj", "{BB91B0AE-3414-4FB2-881B-947FF3B0D1B8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,10 @@ Global
 		{2767F163-8C75-491F-963E-2B5153D21DB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2767F163-8C75-491F-963E-2B5153D21DB4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2767F163-8C75-491F-963E-2B5153D21DB4}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{BB91B0AE-3414-4FB2-881B-947FF3B0D1B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB91B0AE-3414-4FB2-881B-947FF3B0D1B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB91B0AE-3414-4FB2-881B-947FF3B0D1B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB91B0AE-3414-4FB2-881B-947FF3B0D1B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

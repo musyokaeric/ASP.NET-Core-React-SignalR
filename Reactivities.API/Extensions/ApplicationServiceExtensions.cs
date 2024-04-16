@@ -2,6 +2,8 @@
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Reactivities.Application.Activities;
+using Reactivities.Application.Interfaces;
+using Reactivities.Infrasctructure.Security;
 using Reactivities.Persistence;
 
 namespace Reactivities.API.Extensions
@@ -30,6 +32,10 @@ namespace Reactivities.API.Extensions
                     policy.AllowAnyHeader().AllowAnyMethod().WithOrigins(clientUrl);
                 });
             });
+
+            // HTTP Context Accessor
+            services.AddHttpContextAccessor();
+            services.AddScoped<IUserAccessor, UserAccessor>();
 
             return services;
         }
