@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Reactivities.API.DTOs;
 using Reactivities.API.Services;
 using Reactivities.Domain;
@@ -42,6 +43,33 @@ namespace Reactivities.API.Controllers
             }
 
             return Unauthorized();
+        }
+
+        [HttpPost("register")]
+        public async Task<ActionResult<UserDTO>> Register(RegisterDTO registerDTO)
+        {
+            if (await userManager.Users.AnyAsync(x => x.UserName == registerDTO.Username)) return BadRequest("Username is already taken");
+
+            if (await userManager.Users.AnyAsync(x => x.Email == registerDTO.Email)) return BadRequest("Email is already taken");
+
+            var user = new AppUser
+            {
+                DisplayName = registerDTO.DisplayName,
+                Email = registerDTO.Email,
+                UserName = registerDTO.Username
+            };
+
+            var result = await userManager.CreateAsync(user, registerDTO.Password);
+
+            if (result.Succeeded) return new UserDTO
+            {
+                DisplayName = user.DisplayName,
+                Image = null,
+                Token = tokenService.CreateToken(user),
+                Userame = user.UserName,
+            };
+
+            return BadRequest(result.Errors);
         }
     }
 }

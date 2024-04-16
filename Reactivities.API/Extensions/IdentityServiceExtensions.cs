@@ -14,6 +14,7 @@ namespace Reactivities.API.Extensions
             services.AddIdentityCore<AppUser>(options =>
             {
                 options.Password.RequireNonAlphanumeric = false;
+                options.User.RequireUniqueEmail = true;
             }).AddEntityFrameworkStores<DataContext>();
 
             // key has to match exactly with our token service
