@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using Reactivities.API.Services;
 using Reactivities.Domain;
+using Reactivities.Infrasctructure.Security;
 using Reactivities.Persistence;
 using System.Text;
 
@@ -33,6 +35,13 @@ namespace Reactivities.API.Extensions
 
             // JWT Service
             services.AddScoped<TokenService>();
+
+            // Custom authorization policy
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("IsActivityHost", policy => policy.Requirements.Add(new IsHostRequirement()));
+            });
+            services.AddTransient<IAuthorizationHandler, IsHostRequirementHandler>();
 
             return services;
         }
