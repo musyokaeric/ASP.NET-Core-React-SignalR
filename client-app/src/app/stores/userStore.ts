@@ -35,6 +35,23 @@ export default class UserStore {
         router.navigate('/');
     }
 
+    register = async (creds: UserFormValues) => {
+        try {
+            const user = await agent.Account.register(creds);
+
+            store.commonStore.setToken(user.token);
+
+            runInAction(() => this.user = user);
+
+            router.navigate('/activities');
+
+            store.modalStore.closeModal();
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
     getUser = async () => {
         try {
             const user = await agent.Account.current();

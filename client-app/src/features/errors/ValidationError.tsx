@@ -6,7 +6,7 @@ interface Props {
 
 export default function ValidationError({ errors }: Props) {
     return (
-        <Message error>
+        <Message negative>
             {
                 errors &&
                 <Message.List>
