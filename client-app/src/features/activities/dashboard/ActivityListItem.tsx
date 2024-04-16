@@ -5,13 +5,18 @@ import { format } from "date-fns";
 import ActivityListItemAttendee from "./ActivityListItemAttendee";
 
 interface Props {
-    activity:Activity
+    activity: Activity
 }
 
 export default function ActivityListItem({ activity }: Props) {
     return (
         <Segment.Group>
             <Segment>
+                {
+                    activity.isCancelled &&
+                    <Label attached='top' color='red' content='Cancelled' style={{ textAlign: 'center' }} />
+                }
+
                 <Item.Group>
                     <Item>
                         <Item.Image size='tiny' circular src='/assets/user.png' />
@@ -45,8 +50,8 @@ export default function ActivityListItem({ activity }: Props) {
 
             <Segment>
                 <span>
-                    <Icon name='clock' /> {format(activity.date!,'dd MMM yyyy h:mm a')}
-                    <Icon name='marker' />{activity.venue }
+                    <Icon name='clock' /> {format(activity.date!, 'dd MMM yyyy h:mm a')}
+                    <Icon name='marker' />{activity.venue}
                 </span>
             </Segment>
 
@@ -57,7 +62,7 @@ export default function ActivityListItem({ activity }: Props) {
             <Segment clearing>
                 <span>{activity.description}</span>
 
-                <Button as={Link} to={`/activities/${activity.id}` } color='teal' floated='right' content='View'/>
+                <Button as={Link} to={`/activities/${activity.id}`} color='teal' floated='right' content='View' />
             </Segment>
         </Segment.Group>
     )
