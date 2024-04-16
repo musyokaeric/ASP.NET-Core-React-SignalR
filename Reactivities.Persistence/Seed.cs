@@ -1,11 +1,33 @@
-﻿using Reactivities.Domain;
+﻿using Microsoft.AspNetCore.Identity;
+using Reactivities.Domain;
 
 namespace Reactivities.Persistence
 {
     public class Seed
     {
-        public static async Task SeedDataAsync(DataContext context)
+        public static async Task SeedDataAsync(DataContext context, UserManager<AppUser> userManager)
         {
+            #region Seed Users
+
+            if (!userManager.Users.Any())
+            {
+                var users = new List<AppUser>
+                {
+                    new AppUser { DisplayName = "Bob", UserName = "bob", Email = "bob@reactivities.com"},
+                    new AppUser { DisplayName = "Tom", UserName = "tom", Email = "tom@reactivities.com"},
+                    new AppUser { DisplayName = "Jane", UserName = "jane", Email = "jane@reactivities.com"},
+                };
+
+                foreach (var user in users)
+                {
+                    await userManager.CreateAsync(user, "Password01!");
+                }
+            }
+
+            #endregion
+
+            #region Seed Activities
+
             if (context.Activities.Any()) return;
 
             var activities = new List<Activity>
@@ -104,6 +126,8 @@ namespace Reactivities.Persistence
 
             await context.Activities.AddRangeAsync(activities);
             await context.SaveChangesAsync();
+
+            #endregion
         }
     }
 }

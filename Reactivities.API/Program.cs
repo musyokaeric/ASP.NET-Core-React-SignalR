@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Reactivities.API.Extensions;
 using Reactivities.API.MiddleWare;
+using Reactivities.Domain;
 using Reactivities.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +17,9 @@ builder.Services.AddSwaggerGen();
 
 // Application Service Extension
 builder.Services.AddApplicationServices(builder.Configuration);
+
+// Identity Service Extension
+builder.Services.AddIdentityServices(builder.Configuration);
 
 
 var app = builder.Build();
@@ -47,8 +52,9 @@ var services = scope.ServiceProvider;
 try
 {
     var context = services.GetRequiredService<DataContext>();
+    var userManager = services.GetRequiredService<UserManager<AppUser>>();
     await context.Database.MigrateAsync(); // Applies any pending migrations. Creates the database if it does not exist
-    await Seed.SeedDataAsync(context);
+    await Seed.SeedDataAsync(context, userManager);
 }
 catch (Exception ex)
 {
