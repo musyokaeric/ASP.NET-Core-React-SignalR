@@ -8,6 +8,13 @@ namespace Reactivities.API.Services
 {
     public class TokenService
     {
+        private readonly IConfiguration configuration;
+
+        public TokenService(IConfiguration configuration)
+        {
+            this.configuration = configuration;
+        }
+
         public string CreateToken(AppUser user)
         {
             var claims = new List<Claim>
@@ -19,7 +26,7 @@ namespace Reactivities.API.Services
 
             // Symmetric key - same key used for encryption and decryption. Opposite: Asymmetrical key 
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("super secret key with at least 64 characters otherwise you get an exception error"));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["TokenKey"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
             var tokenDescriptor = new SecurityTokenDescriptor
