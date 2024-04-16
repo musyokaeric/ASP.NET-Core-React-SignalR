@@ -82,7 +82,7 @@ namespace Reactivities.API.Controllers
             DisplayName = user.DisplayName,
             Image = null,
             Token = tokenService.CreateToken(user),
-            Userame = user.UserName,
+            Username = user.UserName,
         };
     }
 }
