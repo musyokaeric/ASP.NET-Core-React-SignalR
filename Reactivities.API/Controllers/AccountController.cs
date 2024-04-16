@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Reactivities.API.DTOs;
+using Reactivities.API.Services;
 using Reactivities.Domain;
 
 namespace Reactivities.API.Controllers
@@ -10,10 +11,12 @@ namespace Reactivities.API.Controllers
     public class AccountController : ControllerBase
     {
         private readonly UserManager<AppUser> userManager;
+        private readonly TokenService tokenService;
 
-        public AccountController(UserManager<AppUser> userManager)
+        public AccountController(UserManager<AppUser> userManager, TokenService tokenService)
         {
             this.userManager = userManager;
+            this.tokenService = tokenService;
         }
 
         [HttpPost("login")]
@@ -31,7 +34,7 @@ namespace Reactivities.API.Controllers
                 {
                     DisplayName = user.DisplayName,
                     Image = null,
-                    Token = "this will be a token",
+                    Token = tokenService.CreateToken(user),
                     Userame = user.UserName,
                 };
             }
