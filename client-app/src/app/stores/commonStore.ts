@@ -1,13 +1,25 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, reaction } from "mobx";
 import { ServerError } from "../models/serverError";
 
 export default class CommonStore {
     error: ServerError | null = null;
-    token: string | null | undefined = null;
+    token: string | null | undefined = localStorage.getItem('jwt');
     appLoaded = false;
 
     constructor() {
         makeAutoObservable(this);
+
+        // reacting to change to this particular observable
+        reaction(
+            () => this.token, // what to react to
+            token => { // what to do with it
+                if (token) {
+                    localStorage.setItem('jwt', token)
+                } else {
+                    localStorage.removeItem('jwt')
+                }
+            }
+        )
     }
 
     setServerError(error: ServerError) {
@@ -15,7 +27,6 @@ export default class CommonStore {
     }
 
     setToken = (token: string | null | undefined) => {
-        if (token) localStorage.setItem('jwt', token);
         this.token = token;
     }
 
