@@ -26,5 +26,8 @@ namespace Reactivities.API.Controllers
 
         [HttpDelete("{id}")] //api/activities/{id}
         public async Task<IActionResult> DeleteActivity(Guid id) => HandleResult(await Mediator.Send(new Delete.Command { Id = id }));
+
+        [HttpPost("{id}/attend")]
+        public async Task<IActionResult> Attend(Guid id) => HandleResult(await Mediator.Send(new UpdateAttendance.Command { Id = id }));
     }
 }
