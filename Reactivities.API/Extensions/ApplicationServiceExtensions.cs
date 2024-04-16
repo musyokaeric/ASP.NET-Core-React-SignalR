@@ -2,6 +2,7 @@
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Reactivities.Application.Activities;
+using Reactivities.Application.Core;
 using Reactivities.Application.Interfaces;
 using Reactivities.Infrasctructure.Security;
 using Reactivities.Persistence;
@@ -36,6 +37,9 @@ namespace Reactivities.API.Extensions
             // HTTP Context Accessor
             services.AddHttpContextAccessor();
             services.AddScoped<IUserAccessor, UserAccessor>();
+
+            // Automapper
+            services.AddAutoMapper(typeof(MappingProfiles).Assembly);
 
             return services;
         }
