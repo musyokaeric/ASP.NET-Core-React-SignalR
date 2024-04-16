@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore;
 using Reactivities.API.DTOs;
 using Reactivities.API.Services;
 using Reactivities.Domain;
+using System.Security.Claims;
 
 namespace Reactivities.API.Controllers
 {
-    [AllowAnonymous] //ensures that all of these endpoints no longer need authentication in order to access them
     [ApiController]
     [Route("api/[controller]")]
     public class AccountController : ControllerBase
@@ -22,6 +22,7 @@ namespace Reactivities.API.Controllers
             this.tokenService = tokenService;
         }
 
+        [AllowAnonymous] //ensures that this endpoint no longer needs authentication in order to access it
         [HttpPost("login")]
         public async Task<ActionResult<UserDTO>> Login(LoginDTO loginDTO)
         {
@@ -31,20 +32,12 @@ namespace Reactivities.API.Controllers
 
             var result = await userManager.CheckPasswordAsync(user, loginDTO.Password);
 
-            if (result)
-            {
-                return new UserDTO
-                {
-                    DisplayName = user.DisplayName,
-                    Image = null,
-                    Token = tokenService.CreateToken(user),
-                    Userame = user.UserName,
-                };
-            }
+            if (result) return CreateUserObject(user);
 
             return Unauthorized();
         }
 
+        [AllowAnonymous] //ensures that this endpoint no longer needs authentication in order to access it
         [HttpPost("register")]
         public async Task<ActionResult<UserDTO>> Register(RegisterDTO registerDTO)
         {
@@ -61,15 +54,26 @@ namespace Reactivities.API.Controllers
 
             var result = await userManager.CreateAsync(user, registerDTO.Password);
 
-            if (result.Succeeded) return new UserDTO
-            {
-                DisplayName = user.DisplayName,
-                Image = null,
-                Token = tokenService.CreateToken(user),
-                Userame = user.UserName,
-            };
+            if (result.Succeeded) return CreateUserObject(user);
 
             return BadRequest(result.Errors);
         }
+
+        [Authorize]
+        [HttpGet]
+        public async Task<ActionResult<UserDTO>> GetCurrentUser()
+        {
+            var user = await userManager.FindByEmailAsync(User.FindFirstValue(ClaimTypes.Email));
+
+            return CreateUserObject(user);
+        }
+
+        private UserDTO CreateUserObject(AppUser user) => new UserDTO
+        {
+            DisplayName = user.DisplayName,
+            Image = null,
+            Token = tokenService.CreateToken(user),
+            Userame = user.UserName,
+        };
     }
 }
