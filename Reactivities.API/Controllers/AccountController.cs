@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Reactivities.API.DTOs;
 using Reactivities.API.Services;
@@ -6,6 +7,7 @@ using Reactivities.Domain;
 
 namespace Reactivities.API.Controllers
 {
+    [AllowAnonymous] //ensures that all of these endpoints no longer need authentication in order to access them
     [ApiController]
     [Route("api/[controller]")]
     public class AccountController : ControllerBase
