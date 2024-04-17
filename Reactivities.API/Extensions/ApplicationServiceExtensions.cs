@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Reactivities.Application.Activities;
 using Reactivities.Application.Core;
 using Reactivities.Application.Interfaces;
+using Reactivities.Infrasctructure.Photos;
 using Reactivities.Infrasctructure.Security;
 using Reactivities.Persistence;
 
@@ -40,6 +41,10 @@ namespace Reactivities.API.Extensions
 
             // Automapper
             services.AddAutoMapper(typeof(MappingProfiles).Assembly);
+
+            // Cloudinary Service
+            services.Configure<CloudinarySettings>(configuration.GetSection("Cloudinary"));
+            services.AddScoped<IPhotoAccessor, PhotoAccessor>();
 
             return services;
         }
