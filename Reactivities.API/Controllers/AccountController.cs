@@ -27,7 +27,9 @@ namespace Reactivities.API.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<UserDTO>> Login(LoginDTO loginDTO)
         {
-            var user = await userManager.FindByEmailAsync(loginDTO.Email);
+            var user = await userManager.Users
+                .Include(p => p.Photos)
+                .FirstOrDefaultAsync(u => u.Email == loginDTO.Email);
 
             if (user == null) return Unauthorized();
 
@@ -72,7 +74,9 @@ namespace Reactivities.API.Controllers
         [HttpGet]
         public async Task<ActionResult<UserDTO>> GetCurrentUser()
         {
-            var user = await userManager.FindByEmailAsync(User.FindFirstValue(ClaimTypes.Email));
+            var user = await userManager.Users
+                .Include(p => p.Photos)
+                .FirstOrDefaultAsync(u => u.Email == User.FindFirstValue(ClaimTypes.Email));
 
             return CreateUserObject(user);
         }
@@ -80,7 +84,7 @@ namespace Reactivities.API.Controllers
         private UserDTO CreateUserObject(AppUser user) => new UserDTO
         {
             DisplayName = user.DisplayName,
-            Image = null,
+            Image = user?.Photos?.FirstOrDefault(p => p.IsMain)?.Url,
             Token = tokenService.CreateToken(user),
             Username = user.UserName,
         };
