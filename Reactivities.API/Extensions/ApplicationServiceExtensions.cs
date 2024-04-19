@@ -31,7 +31,7 @@ namespace Reactivities.API.Extensions
                 string clientUrl = "http://localhost:3000";
                 options.AddPolicy("CorsPolicy", policy =>
                 {
-                    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins(clientUrl);
+                    policy.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins(clientUrl);
                 });
             });
 
