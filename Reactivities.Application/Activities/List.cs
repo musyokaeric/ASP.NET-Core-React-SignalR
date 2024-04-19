@@ -2,9 +2,8 @@
 using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using Reactivities.Application.Core;
-using Reactivities.Domain;
+using Reactivities.Application.Interfaces;
 using Reactivities.Persistence;
 
 namespace Reactivities.Application.Activities
@@ -17,17 +16,19 @@ namespace Reactivities.Application.Activities
         {
             private readonly DataContext context;
             private readonly IMapper mapper;
+            private readonly IUserAccessor userAccessor;
 
-            public Handler(DataContext context, IMapper mapper)
+            public Handler(DataContext context, IMapper mapper, IUserAccessor userAccessor)
             {
                 this.context = context;
                 this.mapper = mapper;
+                this.userAccessor = userAccessor;
             }
 
             public async Task<Result<List<ActivityDTO>>> Handle(Query request, CancellationToken cancellationToken)
             {
                 var activities = await context.Activities
-                    .ProjectTo<ActivityDTO>(mapper.ConfigurationProvider)
+                    .ProjectTo<ActivityDTO>(mapper.ConfigurationProvider, new { currentUsername = userAccessor.GetUsername() })
                     .ToListAsync(cancellationToken);
 
                 return Result<List<ActivityDTO>>.Success(activities);
