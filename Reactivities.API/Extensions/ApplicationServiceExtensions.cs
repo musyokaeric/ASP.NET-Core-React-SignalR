@@ -46,6 +46,9 @@ namespace Reactivities.API.Extensions
             services.Configure<CloudinarySettings>(configuration.GetSection("Cloudinary"));
             services.AddScoped<IPhotoAccessor, PhotoAccessor>();
 
+            // SignalR Service
+            services.AddSignalR();
+
             return services;
         }
     }

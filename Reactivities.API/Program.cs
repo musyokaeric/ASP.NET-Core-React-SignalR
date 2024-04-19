@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Reactivities.API.Extensions;
 using Reactivities.API.MiddleWare;
+using Reactivities.API.SignalR;
 using Reactivities.Domain;
 using Reactivities.Persistence;
 
@@ -51,6 +52,9 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+// SignalR
+app.MapHub<ChatHub>("/chat");
 
 // Database creation & data seeding
 
