@@ -29,7 +29,7 @@ namespace Reactivities.Application.Comments
             {
                 var comments = await context.Comments
                     .Where(c => c.Activity.Id == request.ActivityId)
-                    .OrderBy(c => c.CreatedAt)
+                    .OrderByDescending(c => c.CreatedAt)
                     .ProjectTo<CommentDTO>(mapper.ConfigurationProvider)
                     .ToListAsync();
 
