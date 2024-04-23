@@ -20,9 +20,6 @@ export default class ActivityStore {
     }
 
     setPagingParams = (pagingParams: PagingParams) => {
-        console.log(pagingParams);
-        console.log(this.pagination);
-        console.log(this.pagingParams);
         this.pagingParams = pagingParams;
     }
 
