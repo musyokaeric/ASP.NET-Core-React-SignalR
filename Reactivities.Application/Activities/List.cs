@@ -31,11 +31,12 @@ namespace Reactivities.Application.Activities
             public async Task<Result<PagedList<ActivityDTO>>> Handle(Query request, CancellationToken cancellationToken)
             {
                 var query = context.Activities
+                    .OrderBy(d => d.Date)
                     .ProjectTo<ActivityDTO>(mapper.ConfigurationProvider, new { currentUsername = userAccessor.GetUsername() })
                     .AsQueryable();
 
                 return Result<PagedList<ActivityDTO>>.Success(
-                        await PagedList<ActivityDTO>.CreateAsync(query,request.Params.PageNumber, request.Params.PageSize)
+                        await PagedList<ActivityDTO>.CreateAsync(query, request.Params.PageNumber, request.Params.PageSize)
                     );
             }
         }

@@ -9,7 +9,7 @@ namespace Reactivities.API.Controllers
     public class ActivitiesController : BaseApiController
     {
         [HttpGet] //api/activities
-        public async Task<IActionResult> GetActivities([FromQuery] PagingParams param) => HandleResult(await Mediator.Send(new List.Query { Params = param}));
+        public async Task<IActionResult> GetActivities([FromQuery] PagingParams param) => HandlePagedResult(await Mediator.Send(new List.Query { Params = param}));
 
         [HttpGet("{id}")] //api/activities/{id}
         public async Task<IActionResult> GetActivity(Guid id) => HandleResult(await Mediator.Send(new Details.Query { Id = id }));
