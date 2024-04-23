@@ -19,7 +19,10 @@ export default class ActivityStore {
         makeAutoObservable(this)
     }
 
-    setPagingParams(pagingParams: PagingParams) {
+    setPagingParams = (pagingParams: PagingParams) => {
+        console.log(pagingParams);
+        console.log(this.pagination);
+        console.log(this.pagingParams);
         this.pagingParams = pagingParams;
     }
 
@@ -51,7 +54,7 @@ export default class ActivityStore {
 
         try {
             const result = await agent.Activities.list(this.axiosParams);
-            result.data.forEach(activity => this.setActivity(activity))
+            result.data.forEach(activity => this.setActivity(activity));
             this.setPagination(result.pagination);
             this.setLoadingInitial(false);
         } catch (error) {
