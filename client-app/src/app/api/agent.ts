@@ -11,11 +11,11 @@ const sleep = (delay: number) => new Promise((resolve) => {
     setTimeout(resolve, delay)
 })
 
-axios.defaults.baseURL = 'https://localhost:7000/api';
+axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 
 // simulates a delay while the entities are being loaded
 axios.interceptors.response.use(async response => {
-    await sleep(1000);
+    if (import.meta.env.DEV) await sleep(1000);
 
     const pagination = response.headers['pagination'];
     if (pagination) {
