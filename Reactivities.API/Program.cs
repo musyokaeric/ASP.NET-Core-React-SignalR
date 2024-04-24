@@ -51,10 +51,16 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
 app.MapControllers();
 
 // SignalR
 app.MapHub<ChatHub>("/chat");
+
+// Fallback controller
+app.MapFallbackToController("Index", "Fallback");
 
 // Database creation & data seeding
 
