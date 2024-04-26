@@ -15,7 +15,7 @@ namespace Reactivities.API.Extensions
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration configuration)
         {
             // Database Context
-            services.AddDbContext<DataContext>(options => options.UseSqlite(configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<DataContext>(options => options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
 
             // MediatR Service
             services.AddMediatR(config => config.RegisterServicesFromAssembly(typeof(List.Handler).Assembly));
